@@ -1,4 +1,5 @@
 import Button from "./Button";
+import img1 from "../assets/img/1.jpg"; // Ajusta la ruta según la ubicación de tu componente
 
 function FeaturedProducts() {
   return (
@@ -8,7 +9,7 @@ function FeaturedProducts() {
       </h2>
       <section className="grid grid-cols-2 w-6/12 gap-2 my-5 max-sm:grid-cols-1 ">
         <img
-          src="src/assets/img/1.jpg"
+          src={img1}
           alt="Camisa Destacada"
           className="w-80 rounded-2xl shadow-2xl"
         />

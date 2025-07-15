@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import imgExample from "../assets/img/example.jpg"; // Ajusta la ruta según la ubicación de tu componente
 
 function Hero() {
  return (
@@ -24,7 +25,7 @@ function Hero() {
         {/* Imagen */}
         <div className="flex justify-center md:justify-end">
           <img
-            src="./src\assets\img\example.jpg" 
+            src={imgExample}
             alt="Camiseta promocional"
             className="w-72 md:w-96 rounded-2xl shadow-lg"
           />
