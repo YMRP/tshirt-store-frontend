@@ -34,7 +34,6 @@ function UserData({ carrito, limpiarCarrito }: UserDataProps) {
       carrito,
     };
 
-    console.log("Payload a enviar al backend:", payload);
 
     try {
       const response = await axios.post(`${API_URL}crearPedido`, payload);
@@ -54,7 +53,6 @@ function UserData({ carrito, limpiarCarrito }: UserDataProps) {
 
       limpiarCarrito(); // Llama directamente la función prop
     } catch (error) {
-      console.error("Error al confirmar el pedido:", error);
       alert("Ocurrió un error al confirmar el pedido");
     }
   };

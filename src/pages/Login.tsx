@@ -27,7 +27,6 @@ function Login() {
 
       navigate("/");
     } catch (error: any) {
-      console.error("Error en login:", error.response?.data || error.message);
       toast.error("Credenciales incorrectas");
     }
   };

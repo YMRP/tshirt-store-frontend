@@ -70,7 +70,7 @@ function AddShirts() {
       limpiarFormulario();
       cargarCamisas();
     } catch (error: any) {
-      console.error("Error:", error.response?.data || error.message);
+      // console.error("Error:", error.response?.data || error.message);
       toast.error("Error al guardar la camisa");
     } finally {
       setLoading(false);

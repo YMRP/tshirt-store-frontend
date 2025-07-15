@@ -24,7 +24,7 @@ function Product({
     setTallaSeleccionada(e.target.value as Talla);
   };
   const handleAgregar = () => {
-    console.log("agregando producto con id", id, "talla", tallaSeleccionada);
+    // console.log("agregando producto con id", id, "talla", tallaSeleccionada);
     const productoParaCarrito: CarritoItems = {
       id,
       nombreCamisa,
