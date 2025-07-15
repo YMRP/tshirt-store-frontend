@@ -23,7 +23,10 @@ export type CarritoItems = CamisaProps & {
   cantidad: number;
   talla?: "Chica" | "Mediana" | "Grande";
 };
-
+export type UserDataProps ={
+  carrito: CarritoItems[];
+  limpiarCarrito: () => void;
+}
 export type CarritoProps = {
   // El carrito es un arreglo de productos en el carrito,
   // donde cada producto tiene sus datos y la cantidad seleccionada

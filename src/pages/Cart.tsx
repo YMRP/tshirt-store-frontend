@@ -1,12 +1,28 @@
+import { useState } from "react";
 import Header from "../components/Header";
 import type { CarritoProps } from "../types/types";
 import { PiEmpty } from "react-icons/pi";
+import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom"; // importa esto arriba
 
 function Cart({ carrito, eliminarCarrito }: CarritoProps) {
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const navigate = useNavigate();
+  const comprar = () => {
+    setMostrarModal(true);
+  };
+
+  const confirmarCompra = () => {
+    setMostrarModal(false);
+    // Aquí podrías hacer una petición a una API o vaciar el carrito, etc.
+    // Navega a la página de datos del usuario y pasa el carrito
+    navigate("/user-data");
+  };
+
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-gray-100 p-6  w-full ">
+      <main className="min-h-screen bg-gray-100 p-6 w-full">
         {carrito.length === 0 ? (
           <div className="flex flex-col items-center gap-10 mt-20">
             <p className="text-4xl font-black text-center text-gray-700">
@@ -31,7 +47,6 @@ function Cart({ carrito, eliminarCarrito }: CarritoProps) {
                     )}
                   </div>
                   <button
-                   
                     onClick={() => eliminarCarrito(item.id!, item.talla)}
                     className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded font-semibold transition cursor-pointer"
                   >
@@ -40,12 +55,42 @@ function Cart({ carrito, eliminarCarrito }: CarritoProps) {
                 </li>
               ))}
             </ul>
-            <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-semibold transition cursor-pointer block mx-0 mt-10">
+
+            <button
+              onClick={comprar}
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-semibold transition cursor-pointer block mx-0 mt-10"
+            >
               Comprar
             </button>
           </div>
         )}
       </main>
+      <Footer />
+
+      {/* Modal */}
+      {mostrarModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm w-full">
+            <h3 className="text-xl font-bold mb-4">
+              ¿Deseas realizar la compra?
+            </h3>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={confirmarCompra}
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded font-semibold transition"
+              >
+                Sí
+              </button>
+              <button
+                onClick={() => setMostrarModal(false)}
+                className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded font-semibold transition"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

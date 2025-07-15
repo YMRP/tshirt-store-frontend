@@ -5,6 +5,8 @@ import Products from "./pages/Products";
 import AboutUs from "./pages/AboutUs";
 import Cart from "./pages/Cart";
 import { useEffect, useState } from "react";
+import UserData from "./pages/UserData";
+import AddShirts from "./pages/AddShirts";
 
 import type { CarritoItems } from "./types/types";
 import { toast } from "sonner";
@@ -34,15 +36,24 @@ export function Router() {
       );
 
       if (existe) {
-        toast.success("Se añadió una prenda más");
-
+        toast.success(
+          <div >
+            {"Se añadio una prenda mas"}
+          </div>,
+          { position: "bottom-right" }
+        );
         return prevCarrito.map((item) =>
           item.id === producto.id && item.talla === producto.talla
             ? { ...item, cantidad: item.cantidad + producto.cantidad }
             : item
         );
       } else {
-        toast.success("Camisa añadida al carrito");
+        toast.success(
+        <div >
+          {"Camisa añadida al carrito"}
+        </div>,
+        { position: "bottom-right" }
+      );
         return [...prevCarrito, producto];
       }
     });
@@ -75,7 +86,12 @@ export function Router() {
         />
 
         <Route path="/about-us" element={<AboutUs />} />
-
+        <Route
+          path="/user-data"
+          element={
+            <UserData carrito={carrito} limpiarCarrito={limpiarCarrito} />
+          }
+        />
         <Route
           path="/cart"
           element={
@@ -86,7 +102,11 @@ export function Router() {
               limpiarCarrito={limpiarCarrito}
             />
           }
+
+        
         />
+
+        <Route path="/add-shirts" element={<AddShirts/>}/>
       </Routes>
     </BrowserRouter>
   );
