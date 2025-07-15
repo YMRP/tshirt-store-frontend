@@ -12,6 +12,8 @@ type Camisa = {
   imagen: string;
 };
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 function AddShirts() {
   const [nombreCamisa, setNombreCamisa] = useState("");
   const [precio, setPrecio] = useState("");
@@ -23,7 +25,7 @@ function AddShirts() {
 
   const cargarCamisas = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/getCamisasStock");
+      const response = await axios.get(`${BACKEND_URL}getCamisasStock`);
       setCamisas(response.data);
     } catch (error) {
       toast.error("Error al cargar camisas");
@@ -50,7 +52,7 @@ function AddShirts() {
       if (editId === null) {
         // Crear
         await axios.post(
-          "http://localhost:3000/crearCamisa",
+          `${BACKEND_URL}crearCamisa`,
           { nombreCamisa, precio: parseFloat(precio), desc, imagen },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -58,7 +60,7 @@ function AddShirts() {
       } else {
         // Modificar
         await axios.put(
-          `http://localhost:3000/modCamisa/${editId}`,
+          `${BACKEND_URL}modCamisa/${editId}`,
           { nombreCamisa, precio: parseFloat(precio), desc, imagen },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -85,7 +87,7 @@ function AddShirts() {
 
   const eliminarCamisa = async (id: number) => {
     try {
-      await axios.delete(`http://localhost:3000/deleteCamisa/${id}`);
+      await axios.delete(`${BACKEND_URL}deleteCamisa/${id}`);
       toast.success("Camisa eliminada");
       cargarCamisas();
     } catch (error) {

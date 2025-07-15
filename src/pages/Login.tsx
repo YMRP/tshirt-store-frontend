@@ -1,20 +1,22 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";  // <--- importa useNavigate para redirigir
+import { useNavigate } from "react-router-dom"; 
 import { RiAccountCircle2Line, RiArrowLeftBoxFill } from "react-icons/ri";
 import { toast } from "sonner";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 function Login() {
   const [correo, setCorreo] = useState("");
   const [contrasena, setContrasena] = useState("");
-  const navigate = useNavigate();  // <--- hook para redirigir
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        `${BACKEND_URL}api/auth/login`,
         { correo, contrasena }
       );
 
@@ -23,7 +25,7 @@ function Login() {
 
       toast.success(`Bienvenido: ${response.data.usuario.correo}`);
 
-      navigate("/");  // <--- redirige a /home después de login exitoso
+      navigate("/");
     } catch (error: any) {
       console.error("Error en login:", error.response?.data || error.message);
       toast.error("Credenciales incorrectas");

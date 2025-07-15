@@ -10,6 +10,8 @@ interface UserDataProps {
   limpiarCarrito: () => void;
 }
 
+const API_URL = import.meta.env.VITE_BACKEND_URL;
+
 function UserData({ carrito, limpiarCarrito }: UserDataProps) {
   const [form, setForm] = useState({
     nombre: "",
@@ -35,14 +37,9 @@ function UserData({ carrito, limpiarCarrito }: UserDataProps) {
     console.log("Payload a enviar al backend:", payload);
 
     try {
-      const response = await axios.post(
-        "http://localhost:3000/crearPedido",
-        payload
-      );
+      const response = await axios.post(`${API_URL}crearPedido`, payload);
       toast.success(
-        <div>
-          {`Pedido confirmado: ${response.data.pedidoId}`}
-        </div>,
+        <div>{`Pedido confirmado: ${response.data.pedidoId}`}</div>,
         { position: "top-right" }
       );
 
